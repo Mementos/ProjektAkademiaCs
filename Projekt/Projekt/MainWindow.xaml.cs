@@ -1,0 +1,239 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using System.Windows.Threading;
+using System.ComponentModel;
+
+namespace Projekt
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    /// 
+
+    public partial class MainWindow : Window, INotifyPropertyChanged
+    {
+        private List<PhysicalActivity> ActivityList;
+
+        private double totalDistance;
+
+        public double TotalDistance
+        {
+            get { return totalDistance; }
+            set
+            {
+                double temp = 0;
+                foreach (var item in ActivityList)
+                {
+                    
+                  temp += item.Distance;
+                }
+
+                totalDistance = temp;
+                NotifyPropertyChanged("TotalDistance");
+            }
+        }
+
+
+
+
+
+        private int runCount;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public int RunCount
+        {
+            get
+            {
+                //runCount = RunList.Count;
+
+                return runCount;
+            }
+            set
+            {
+                runCount = ActivityList.Count;
+                NotifyPropertyChanged("RunCount");
+
+                //NotifyPropertyChanged("RunCount");
+            }
+        }
+
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            DataContext = this;
+
+            ActivityList = new List<PhysicalActivity>();
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Start();
+            labelDate.Content = DateTime.Now.Date.ToLongDateString();
+            labelTime.Content = DateTime.Now.ToLongTimeString();
+            if (File.Exists("lista.txt"))
+            {
+                ListOfPhysicalActivities.LoadList("lista.txt", listBox, ActivityList);
+                RunCount++;
+                TotalDistance++;
+            }
+
+        }
+        
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            labelTime.Content = DateTime.Now.ToLongTimeString();
+            labelDate.Content = (DateTime.Now.Date.ToLongDateString());
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void Help_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Treść okienka 'Pomoc'");
+        }
+
+        private void About_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Treść okienka 'O Programie'");
+        }
+
+        private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            richTextBox.SelectAll();
+            richTextBox.Cut();
+            string data = Date.SelectedDate.Value.ToShortDateString() + ".rtf";
+
+            Note note = new Note();
+            note.LoadFile(data, richTextBox);
+
+            //Load.LoadFile(data, richTextBox);
+        }
+
+        private void buttonSaveNote_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string data = Date.SelectedDate.Value.ToShortDateString() + ".rtf";
+
+                Note note = new Note();
+                note.SaveFile(data, richTextBox);
+                //Save.SaveFile(data, richTextBox);
+            }
+            catch
+            {
+                MessageBox.Show("Wybierz Datę!");
+            }
+
+        }
+
+        private void textDistance_KeyDown(object sender, KeyEventArgs e)
+        {
+            RunningTabMethods.PeriodKey(sender, e, textDistance);
+        }
+
+        private void textTime_KeyDown(object sender, KeyEventArgs e)
+        {
+            RunningTabMethods.PeriodKey(sender, e, textTime);
+        }
+
+        private void textWeight_KeyDown(object sender, KeyEventArgs e)
+        {
+            RunningTabMethods.PeriodKey(sender, e, textWeight);
+        }
+        private void textTime_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            RunningTabMethods.CheckingDigit(sender, e);
+        }
+
+        private void textDistance_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            RunningTabMethods.CheckingDigit(sender, e);
+        }
+
+        private void textWeight_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            RunningTabMethods.CheckingDigit(sender, e);
+        }
+
+        private void buttonClear_Click(object sender, RoutedEventArgs e)
+        {
+            ActivityList.Clear();
+            RunningTabMethods.UpdateRunList(listBox, ActivityList);
+        }
+
+        private void buttonDelete_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ActivityList.RemoveAt(listBox.SelectedIndex);
+                RunningTabMethods.UpdateRunList(listBox, ActivityList);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Zaznacz aktywność do usunięcia");
+            }
+        }
+
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        {
+            bool isRun = false;
+            if (chosenSport.Text == "Bieganie")
+                isRun = true;
+
+            ActivityType chosenActivity;
+            switch (chosenTypeOfActivity.Text)
+            {
+                case "Interwały":
+                    chosenActivity = ActivityType.Interval;
+                    break;
+                case "Trening":
+                    chosenActivity = ActivityType.Training;
+                    break;
+                case "Zawody":
+                    chosenActivity = ActivityType.Competition;
+                    break;
+                default:
+                    chosenActivity = ActivityType.Training;
+                    break;
+            }
+
+
+            RunningTabMethods.SaveLol(sender, e, ActivityList, textDistance, textTime, textWeight, isRun, chosenActivity);
+            RunningTabMethods.UpdateRunList(listBox, ActivityList);
+            RunCount++;
+            TotalDistance++;
+
+        }
+
+        private void butSaveProgress_Click(object sender, RoutedEventArgs e)
+        {
+            ListOfPhysicalActivities.SaveList(listBox);
+        }
+    }
+}
