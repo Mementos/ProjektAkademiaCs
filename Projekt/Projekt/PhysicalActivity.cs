@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekt
 {
+    //PhysicalActivity
     class PhysicalActivity
     {
         public string Date { get; set; }
