@@ -1,18 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.ComponentModel;
 
@@ -67,16 +58,12 @@ namespace Projekt
         {
             get
             {
-                //runCount = RunList.Count;
-
                 return runCount;
             }
             set
             {
                 runCount = ActivityList.Count;
                 NotifyPropertyChanged("RunCount");
-
-                //NotifyPropertyChanged("RunCount");
             }
         }
 
@@ -115,12 +102,21 @@ namespace Projekt
 
         private void Help_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Treść okienka 'Pomoc'");
+            MessageBox.Show("Aby wprowadzić nową notatkę zakładce 'Notatka', należy kolejno:\n" +
+                " -wybrać interesującą nas datę,\n -wprowadzić treść notatki,\n" + " -wcisnąć przycisk 'Zapisz notatkę'.\n" + 
+                "Od tego momentu po wybraniu tej daty, mamy możliwość przeglądania umieszczonej w tym dniu notatki.\n\n\n" +
+                "Aby zapisać naszą aktywność należy kolejno w zakładce 'Progres':\n" +
+                " -wpisać w odpowiednie pola przebyty przez nas dystans, czas, w którym go pokonaliśmy oraz naszą wagę,\n" +
+                " -wybrać z rozwijalnej listy wykonywaną przez nas aktywność oraz jej typ,\n" +
+                " -dodać nasz wynik przy pomocy przycisku 'Umieść na liście.'\n" +
+                "W celu usunięcia aktywności z listy należy wcisnąć przycisk 'Usuń z listy'. " +
+                "Możliwe jest też usunięcie wszystkich aktywności przy pomocy przycisku 'Wyczyść listę'" +
+                "dzięki przyciskowi 'Zapisz progres' możemy zapisać nasze aktywności do osobnego pliku", "Pomoc");
         }
 
         private void About_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Treść okienka 'O Programie'");
+            MessageBox.Show("Program służy do planowania treningu.\n Dzięki zapisywaniu swoich wyników mamy możliwość wglądu w nasze osiągnięcia i na bierząco analizowania naszych postępów.", "O programie");
         }
 
         private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)

@@ -31,7 +31,7 @@ namespace Projekt
             listBox.Items.Clear();
             for (int i = 0; i < ActivityList.Count; i++)
             {
-                listBox.Items.Add(String.Format("{0,10} {1,20} {2, 20} {3, 20} {4, 20}", ActivityList[i].Date, ActivityList[i].Distance, ActivityList[i].Time, ActivityList[i].Calories, ActivityList[i].GetInfo()));
+                listBox.Items.Add(String.Format("{0,-10} {1,15} {2, 15} {3, 20} {4, 35}", ActivityList[i].Date, ActivityList[i].Distance, ActivityList[i].Time, ActivityList[i].Calories, ActivityList[i].GetInfo()));
             }
         }
         public static void SaveLol(object sender, RoutedEventArgs e, List<PhysicalActivity> ActivityList, TextBox textDistance, TextBox textTime, TextBox textWeight, bool isRun, ActivityType chosenActivity)
@@ -45,12 +45,30 @@ namespace Projekt
             MyActivity.ActivityType = chosenActivity;
          
             MyActivity.Date = DateTime.Today.ToShortDateString();
-            MyActivity.Distance = double.Parse(textDistance.Text);
-            MyActivity.Time = double.Parse(textTime.Text);
-            if (textDistance.Text == "" || textWeight.Text == "")
-                e.Handled = true;
-            else
+            try
+            {
+                MyActivity.Distance = double.Parse(textDistance.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Wpisz pokonany dystans!");
+            }
+            try
+            {
+                MyActivity.Time = double.Parse(textTime.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Wpisz czas!");
+            }
+            try
+            {
                 MyActivity.Calories = double.Parse(textDistance.Text) * double.Parse(textWeight.Text) * 1.01;
+            }
+            catch
+            {
+                MessageBox.Show("Wpisz wagę, aby obliczyć spalone kalorie!");
+            } 
             textTime.Text = "";
             textDistance.Text = "";
             textWeight.Text = "";

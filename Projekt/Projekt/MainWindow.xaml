@@ -104,11 +104,11 @@
                     <TextBox x:Name="textDistance" HorizontalAlignment="Left" Height="23" Margin="10,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" KeyDown="textDistance_KeyDown" PreviewTextInput="textDistance_PreviewTextInput"/>
                     <TextBox x:Name="textWeight" HorizontalAlignment="Left" Height="23" Margin="188,249,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" PreviewTextInput="textWeight_PreviewTextInput" KeyDown="textWeight_KeyDown"/>
                     <Label x:Name="label2" Content="Waga [kg]" HorizontalAlignment="Left" Margin="188,223,0,0" VerticalAlignment="Top" Width="67" Foreground="#FF23FF00"/>
-                    <Label x:Name="label3" Content="Data" HorizontalAlignment="Left" Margin="14,6,0,0" VerticalAlignment="Top" Foreground="#FF23FF00"/>
-                    <Label x:Name="label4" Content="Dystans [km]" HorizontalAlignment="Left" Margin="72,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.171,-0.269" Width="79" Foreground="#FF23FF00"/>
-                    <Label x:Name="label5" Content="Czas [h]" HorizontalAlignment="Left" Height="23" Margin="172,6,0,0" VerticalAlignment="Top" Width="64" Foreground="#FF23FF00"/>
+                    <Label x:Name="label3" Content="Data" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Foreground="#FF23FF00"/>
+                    <Label x:Name="label4" Content="Dystans [km]" HorizontalAlignment="Left" Margin="88,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.171,-0.269" Width="79" Foreground="#FF23FF00"/>
+                    <Label x:Name="label5" Content="Czas [h]" HorizontalAlignment="Left" Height="23" Margin="177,6,0,0" VerticalAlignment="Top" Width="64" Foreground="#FF23FF00"/>
                     <Label x:Name="label6" Content="Spalone kalorie [kcal]" HorizontalAlignment="Left" Margin="241,6,0,291" Width="126" Foreground="#FF23FF00"/>
-                    <Button x:Name="butSaveProgress" Content="Zapisz progres" HorizontalAlignment="Left" Margin="396,29,0,0" VerticalAlignment="Top" Width="86" Click="butSaveProgress_Click" Height="29">
+                    <Button x:Name="butSaveProgress" Content="Zapisz progres" HorizontalAlignment="Left" Margin="385,29,0,0" VerticalAlignment="Top" Width="86" Click="butSaveProgress_Click" Height="29">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="Black" Offset="0"/>
@@ -116,8 +116,8 @@
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
-                    <TextBox x:Name="textBox" Text="{Binding RunCount}" HorizontalAlignment="Left" Height="23" Margin="396,87,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" />
-                    <TextBox x:Name="textBox1" Text="{Binding TotalDistance}" HorizontalAlignment="Left" Height="23" Margin="372,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textCountActivities" Text="{Binding RunCount}" HorizontalAlignment="Left" Height="23" Margin="396,117,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="86" IsEnabled="False" />
+                    <TextBox x:Name="textAllDistance" Text="{Binding TotalDistance}" HorizontalAlignment="Left" Height="23" Margin="372,195,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
                     <ComboBox x:Name="chosenSport" HorizontalAlignment="Left" Margin="299,249,0,0" VerticalAlignment="Top" Width="81">
                         <ComboBoxItem IsSelected="True">Bieganie</ComboBoxItem>
                         <ComboBoxItem>Pływanie</ComboBoxItem>
@@ -127,6 +127,10 @@
                         <ComboBoxItem>Trening</ComboBoxItem>
                         <ComboBoxItem>Zawody</ComboBoxItem>
                     </ComboBox>
+                    <Label x:Name="label7" Content="Ilość wykonanych&#xD;&#xA; aktywności" HorizontalAlignment="Left" Margin="390,75,0,0" VerticalAlignment="Top" Foreground="#FF3AFF00"/>
+                    <Label x:Name="label8" Content="Łączny dystans [km]" HorizontalAlignment="Left" Margin="372,169,0,0" VerticalAlignment="Top" Foreground="#FF0CFF00"/>
+                    <Label x:Name="label9" Content="Sport" HorizontalAlignment="Left" Height="33" Margin="299,223,0,0" VerticalAlignment="Top" Width="56" Foreground="#FF23FF00"/>
+                    <Label x:Name="label10" Content="Tryb" HorizontalAlignment="Left" Height="33" Margin="385,223,0,0" VerticalAlignment="Top" Width="40" Foreground="#FF23FF00"/>
                 </Grid>
             </TabItem>
         </TabControl>
