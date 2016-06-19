@@ -1,0 +1,17 @@
+Program s³u¿y do planowania treningu. 
+Dziêki zapisywaniu swoich wyników mamy mo¿liwoœæ wgl¹du w nasze osi¹gniêcia i na bierz¹co analizowania naszych postêpów.
+           
+Aby wprowadziæ now¹ notatkê zak³adce 'Notatka', nale¿y kolejno:
+	-wybraæ interesuj¹c¹ nas datê,
+	-wprowadziæ treœæ notatki,
+	-wcisn¹æ przycisk 'Zapisz notatkê'. 
+Od tego momentu po wybraniu tej daty, mamy mo¿liwoœæ przegl¹dania umieszczonej w tym dniu notatki.
+
+Aby zapisaæ nasz¹ aktywnoœæ nale¿y kolejno w zak³adce 'Progres':
+	-wpisaæ w odpowiednie pola przebyty przez nas dystans, czas, w którym go pokonaliœmy oraz nasz¹ wagê,
+	-wybraæ z rozwijalnej listy wykonywan¹ przez nas aktywnoœæ oraz jej typ,
+	-dodaæ nasz wynik przy pomocy przycisku 'Umieœæ na liœcie.'
+
+W celu usuniêcia aktywnoœci z listy nale¿y wcisn¹æ przycisk 'Usuñ z listy'.
+Mo¿liwe jest te¿ usuniêcie wszystkich aktywnoœci przy pomocy przycisku 'Wyczyœæ listê'
+Dziêki przyciskowi 'Zapisz progres' mo¿emy zapisaæ nasze aktywnoœci do osobnego pliku
